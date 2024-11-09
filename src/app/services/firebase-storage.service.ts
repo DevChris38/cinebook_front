@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { from, Observable, switchMap } from 'rxjs';
+import { configDotenv } from 'dotenv';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { from, Observable, switchMap } from 'rxjs';
 export class FirebaseStorageService {
   // Your web app's Firebase configuration
   firebaseConfig = {
-    apiKey: 'AIzaSyDxAmRoOtWYKQH0pZvUzZroLnNtk3IxX7U',
+    apiKey: process.env['FIREBASE_API_KEY'],
     authDomain: 'cinebook-c8baa.firebaseapp.com',
     projectId: 'cinebook-c8baa',
     storageBucket: 'cinebook-c8baa.appspot.com',
