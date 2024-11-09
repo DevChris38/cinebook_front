@@ -12,9 +12,12 @@
         <mat-label>Activité</mat-label>
         <mat-select [(value)]="jobSelected">
           <mat-option>None</mat-option>
-          <mat-option value="Ingénieur du son">Ingénieur du son</mat-option>
-          <mat-option value="Monteur vidéo">Monteur vidéo</mat-option>
-          <mat-option value="Réalisateur">Réalisateur</mat-option>
+          @for (jobEnumValue of jobEnumValues; track $index) {
+            <mat-option value="{{ jobEnumValue }}">{{
+                jobEnumValue
+              }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
       <mat-form-field class="m-2">
@@ -24,24 +27,23 @@
 
           @for (regionEnumValue of regionEnumValues; track $index) {
             <mat-option value="{{ regionEnumValue }}">{{
-              regionEnumValue
-            }}</mat-option>
+                regionEnumValue
+              }}
+            </mat-option>
           }
         </mat-select>
       </mat-form-field>
     </div>
     <div class="w-full h-fit flex flex-wrap justify-center gap-[4vw]">
       @for (customer of customers; track customer.phone) {
-        @if (
-          (!jobSelected || jobSelected === customer.jobTitle) &&
-          (!regionSelected || customer.regions.includes(regionSelected))
-        ) {
+        @if ((!jobSelected || jobSelected === customer.jobTitle) &&
+        (!regionSelected || customer.regions.includes(regionSelected))) {
           <mat-card
             class="professional-card basis-[35%] flex-shrink-0 flex-grow-0 h-[60vh] p-2 flex flex-wrap justify-items-center items-center !border-2 !border-[#034963] !bg-[#7a3d0111] rounded-lg"
           >
             <mat-card-header>
               <mat-card-title>{{ customer.name }}</mat-card-title>
-              <mat-card-subtitle>{{ customer.jobTitle }}</mat-card-subtitle>
+              <mat-card-subtitle>{{ getMetierDisplay(customer.jobTitle, customer.sexe) }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content
               class="flex flex-wrap justify-items-center items-center"

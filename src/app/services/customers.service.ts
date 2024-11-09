@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Customer } from '../interfaces/customer';
 import { RegionEnum } from '../enum/region-enum';
+import { JOB_DISPLAY } from '../enum/job-mapping';
+import { JobsEnum } from '../enum/jobs-enum';
+import { SexeEnum } from '../enum/sexe-enum';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +13,8 @@ export class CustomersService {
     return [
       {
         name: 'Jean Dupont',
-        jobTitle: 'Réalisateur',
+        sexe: SexeEnum.MASC,
+        jobTitle: JobsEnum.ACCESSOIRISTE,
         phone: '0123456789',
         email: 'jean.dupont@filmprod.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/1.jpg',
@@ -18,7 +22,8 @@ export class CustomersService {
       },
       {
         name: 'Marie Durand',
-        jobTitle: 'Monteur vidéo',
+        sexe: SexeEnum.FEM,
+        jobTitle: JobsEnum.ADM_PROD,
         phone: '0987654321',
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/2.jpg',
@@ -26,7 +31,8 @@ export class CustomersService {
       },
       {
         name: 'Luc Martin',
-        jobTitle: 'Ingénieur du son',
+        sexe: SexeEnum.MASC,
+        jobTitle: JobsEnum.ACTEUR,
         phone: '0345678912',
         email: 'luc.martin@soundworks.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/2.jpg',
@@ -34,7 +40,8 @@ export class CustomersService {
       },
       {
         name: 'Jean Dupont',
-        jobTitle: 'Réalisateur',
+        sexe: SexeEnum.MASC,
+        jobTitle: JobsEnum.ADM_PROD,
         phone: '0123456789',
         email: 'jean.dupont@filmprod.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/3.jpg',
@@ -42,7 +49,8 @@ export class CustomersService {
       },
       {
         name: 'Marie Durand',
-        jobTitle: 'Monteur vidéo',
+        sexe: SexeEnum.FEM,
+        jobTitle: JobsEnum.ACCESSOIRISTE,
         phone: '0987654321',
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/1.jpg',
@@ -50,7 +58,8 @@ export class CustomersService {
       },
       {
         name: 'Luc Martin',
-        jobTitle: 'Ingénieur du son',
+        sexe: SexeEnum.MASC,
+        jobTitle: JobsEnum.ACCESSOIRISTE,
         phone: '0345678912',
         email: 'luc.martin@soundworks.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/4.jpg',
@@ -58,7 +67,8 @@ export class CustomersService {
       },
       {
         name: 'Jean Dupont',
-        jobTitle: 'Réalisateur',
+        sexe: SexeEnum.MASC,
+        jobTitle: JobsEnum.ACTEUR,
         phone: '0123456789',
         email: 'jean.dupont@filmprod.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/5.jpg',
@@ -66,7 +76,8 @@ export class CustomersService {
       },
       {
         name: 'Marie Durand',
-        jobTitle: 'Monteur vidéo',
+        sexe: SexeEnum.FEM,
+        jobTitle: JobsEnum.ACTEUR,
         phone: '0987654321',
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/3.jpg',
@@ -74,7 +85,8 @@ export class CustomersService {
       },
       {
         name: 'Luc Martin',
-        jobTitle: 'Ingénieur du son',
+        sexe: SexeEnum.MASC,
+        jobTitle: JobsEnum.ACCESSOIRISTE,
         phone: '0345678912',
         email: 'luc.martin@soundworks.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/6.jpg',
@@ -82,7 +94,8 @@ export class CustomersService {
       },
       {
         name: 'Jean Dupont',
-        jobTitle: 'Réalisateur',
+        sexe: SexeEnum.MASC,
+        jobTitle: JobsEnum.ADM_PROD,
         phone: '0123456789',
         email: 'jean.dupont@filmprod.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/7.jpg',
@@ -90,7 +103,8 @@ export class CustomersService {
       },
       {
         name: 'Marie Durand',
-        jobTitle: 'Monteur vidéo',
+        sexe: SexeEnum.FEM,
+        jobTitle: JobsEnum.ADM_PROD,
         phone: '0987654321',
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/4.jpg',
@@ -98,7 +112,8 @@ export class CustomersService {
       },
       {
         name: 'Luc Martin',
-        jobTitle: 'Ingénieur du son',
+        sexe: SexeEnum.MASC,
+        jobTitle: JobsEnum.ACTEUR,
         phone: '0345678912',
         email: 'luc.martin@soundworks.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/8.jpg',
