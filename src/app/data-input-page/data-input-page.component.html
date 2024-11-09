@@ -1,0 +1,91 @@
+<div class="p-10">
+  <h5 class="w-full text-center">
+    Rempli les champs suivants, puis clique sur "Voir mon site"
+  </h5>
+  <form
+    class="flex justify-center flex-wrap"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="mt-12 flex flex-wrap w-full gap-3 justify-evenly">
+      <div class="mt-12 flex flex-col w-1/4">
+        <mat-form-field>
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="prenom" />
+        </mat-form-field>
+        <mat-form-field class="mt-8">
+          <mat-label>Nom de famille</mat-label>
+          <input matInput formControlName="nom" />
+        </mat-form-field>
+        <mat-form-field class="mt-8">
+          <mat-label>facebook</mat-label>
+          <input matInput formControlName="facebookLink" />
+        </mat-form-field>
+        <mat-form-field class="mt-8">
+          <mat-label>X</mat-label>
+          <input matInput formControlName="xLink" />
+        </mat-form-field>
+        <mat-form-field class="mt-8">
+          <mat-label>Linkedin</mat-label>
+          <input matInput formControlName="linkedinLink" />
+        </mat-form-field>
+      </div>
+
+      <div class="mt-12 flex flex-col w-1/4 h-144">
+        <label class="text-center" htmlFor="photoPortrait"
+          >petite photo portrait</label
+        >
+        <div class="flex justify-evenly">
+          <input
+            type="file"
+            (change)="fileChangeEvent($event)"
+            id="photoPortrait"
+            formControlName="photoPortrait"
+          />
+        </div>
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="1 / 1"
+          [roundCropper]="true"
+          format="png"
+          (imageCropped)="photoPortraitCropped($event)"
+          class="h-5/6"
+          [hidden]="!photoPortraitIsLoaded()"
+        ></image-cropper>
+      </div>
+
+      <div class="mt-12 flex flex-col w-1/4 h-144">
+        <label class="text-center" htmlFor="photoAccueil"
+          >photo grand format</label
+        >
+        <div class="flex justify-evenly">
+          <input
+            type="file"
+            (change)="photoAccueilChangeEvent($event)"
+            id="photoAccueil"
+            formControlName="photoAccueil"
+          />
+        </div>
+        <image-cropper
+          [imageChangedEvent]="photoAccueilChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="2 / 1"
+          format="png"
+          (imageCropped)="photoAccueilCropped($event)"
+          class="h-5/6"
+          [hidden]="!photoAccueilIsLoaded()"
+        ></image-cropper>
+      </div>
+    </div>
+
+    <button
+      class="flex mt-8"
+      mat-flat-button
+      (click)="uploadImages()"
+      type="button"
+    >
+      Voir mon site
+    </button>
+  </form>
+</div>

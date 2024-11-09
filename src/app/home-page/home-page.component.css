@@ -1,0 +1,7 @@
+#inscriptionButton:hover {
+  color: var(--primary);
+}
+
+#inscriptionButton {
+  border-color: var(--secondary);
+}

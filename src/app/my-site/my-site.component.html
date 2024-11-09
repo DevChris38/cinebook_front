@@ -1,0 +1,41 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<div id="divBody">
+  <header>
+    <div>
+      <img
+        id="profilImg"
+        [src]="this.customerInformations.photoPortrait"
+        alt="photo portrait"
+      />
+      <h2>
+        {{ this.customerInformations.prenom }}
+        {{ this.customerInformations.nom }}
+      </h2>
+    </div>
+    <nav>
+      <button>Accueil</button>
+      <button>Présentation</button>
+      <button>Galerie</button>
+      <button>Contact</button>
+    </nav>
+
+    <p>Pour me suivre</p>
+  </header>
+  <div id="divMain">
+    <main>
+      <img
+        id="accueilImg"
+        [src]="this.customerInformations.photoAccueil"
+        alt="photo accueil"
+      />
+    </main>
+    <footer></footer>
+  </div>
+</div>

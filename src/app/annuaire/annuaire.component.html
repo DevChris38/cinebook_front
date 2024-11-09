@@ -1,0 +1,68 @@
+<div
+  class="professionals-container background_style_sombre w-full h-full overflow-y-auto"
+>
+  <div
+    class="w-full h-full flex flex-wrap justify-evenly pt-12 pl-[2.5vw] pr-[2.5vw]"
+  >
+    <h1 class="text-2xl">Annuaire des professionnels</h1>
+    <div
+      class="!border-2 !border-[#034963] !bg-[#7a3d0111] w-[90vw] h-fit my-[4vh] rounded-md flex flex-wrap justify-center items-center"
+    >
+      <mat-form-field class="m-2">
+        <mat-label>Activité</mat-label>
+        <mat-select [(value)]="jobSelected">
+          <mat-option>None</mat-option>
+          <mat-option value="Ingénieur du son">Ingénieur du son</mat-option>
+          <mat-option value="Monteur vidéo">Monteur vidéo</mat-option>
+          <mat-option value="Réalisateur">Réalisateur</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="m-2">
+        <mat-label>Région</mat-label>
+        <mat-select [(value)]="regionSelected">
+          <mat-option>None</mat-option>
+
+          @for (regionEnumValue of regionEnumValues; track $index) {
+            <mat-option value="{{ regionEnumValue }}">{{
+              regionEnumValue
+            }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="w-full h-fit flex flex-wrap justify-center gap-[4vw]">
+      @for (customer of customers; track customer.phone) {
+        @if (
+          (!jobSelected || jobSelected === customer.jobTitle) &&
+          (!regionSelected || customer.regions.includes(regionSelected))
+        ) {
+          <mat-card
+            class="professional-card basis-[35%] flex-shrink-0 flex-grow-0 h-[60vh] p-2 flex flex-wrap justify-items-center items-center !border-2 !border-[#034963] !bg-[#7a3d0111] rounded-lg"
+          >
+            <mat-card-header>
+              <mat-card-title>{{ customer.name }}</mat-card-title>
+              <mat-card-subtitle>{{ customer.jobTitle }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content
+              class="flex flex-wrap justify-items-center items-center"
+            >
+              <p><strong>Téléphone:</strong> {{ customer.phone }}</p>
+              <p><strong>Email:</strong> {{ customer.email }}</p>
+              <p><strong>Localisation :</strong></p>
+              @for (region of customer.regions; track $index) {
+                <p>{{ region }}</p>
+              }
+            </mat-card-content>
+            <mat-card-footer>
+              <img
+                [src]="customer.profilePicture"
+                alt="{{ customer.name }}"
+                class="profile-img"
+              />
+            </mat-card-footer>
+          </mat-card>
+        }
+      }
+    </div>
+  </div>
+</div>

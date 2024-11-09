@@ -1,0 +1,87 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: rgb(244, 122, 1);
+  --secondary: rgb(97, 208, 250);
+}
+
+@font-face {
+  font-family: "DM sans";
+  src: url("./font/DMSans-VariableFont_opsz,wght.ttf");
+}
+
+@font-face {
+  font-family: "poppins";
+  src: url("./font/Poppins-Regular.ttf");
+}
+
+* {
+  color: white;
+}
+
+html {
+  height: 100vh;
+}
+
+.background_style_clair {
+  background-attachment: fixed;
+  background: linear-gradient(
+      to bottom left,
+      rgba(23, 0, 0, 0.2) 60%,
+      rgb(244, 122, 1)
+    ),
+    linear-gradient(to bottom right, rgb(24, 0, 0) 50%, rgb(97, 208, 250));
+  background-size: 150%, 150%;
+  animation: gradient 15s linear infinite;
+}
+
+.background_style_sombre {
+  position: fixed;
+  background-attachment: fixed;
+  background: linear-gradient(
+      to bottom left,
+      rgba(24, 0, 0, 0) 70%,
+      rgb(38, 19, 0)
+    ),
+    linear-gradient(to bottom right, rgb(24, 0, 0) 20%, rgb(25, 53, 64));
+  background-size: 150vw 150vh;
+  animation: gradient 15s linear infinite;
+}
+
+header {
+  height: 10vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 50% 50%;
+  }
+  25% {
+    background-position: 0 100%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  75% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 50% 50%;
+  }
+}
+
+header,
+h2 {
+  font-family: "DM sans", "Helvetica Neue", sans-serif;
+}
+
+html {
+  font-family: "poppins", "Helvetica Neue", sans-serif;
+}
+
+#container {
+  min-height: 90vh;
+}
