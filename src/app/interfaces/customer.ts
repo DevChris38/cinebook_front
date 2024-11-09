@@ -6,5 +6,5 @@ export interface Customer {
   phone: string;
   email: string;
   profilePicture: string;
-  regions: RegionEnum[];
+  regions: string[];
 }
