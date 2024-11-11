@@ -20,10 +20,17 @@
 
 * {
   color: white;
+  box-sizing: border-box;
+  scrollbar-width: none; /* Pour Firefox */
 }
 
-html {
-  height: 100vh;
+body {
+  height: auto;
+  min-height: 100vh;
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Pour Chrome, Safari et Edge */
 }
 
 .background_style_clair {
@@ -49,10 +56,6 @@ html {
     linear-gradient(to bottom right, rgb(24, 0, 0) 50%, rgb(25, 53, 64));
   background-size: 150vw 150vh;
   animation: gradient 15s linear infinite;
-}
-
-header {
-  height: 10vh;
 }
 
 @keyframes gradient {
@@ -84,4 +87,6 @@ html {
 
 #container {
   min-height: 90vh;
+  height: auto;
+  margin-bottom: 500px;
 }

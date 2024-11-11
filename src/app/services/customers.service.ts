@@ -25,7 +25,7 @@ export class CustomersService {
         firstName: 'Marie',
         lastName: 'Durand',
         sexe: SexeEnum.FEM,
-        jobTitle: [JobsEnum.ADM_PROD, JobsEnum.ASS_PROD],
+        jobTitle: [JobsEnum.ADM_PROD, JobsEnum.ASS_PROD, JobsEnum.CHAR_PROD],
         phone: '0987654321',
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/2.jpg',

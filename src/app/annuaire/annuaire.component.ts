@@ -6,7 +6,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RegionEnum } from '../enum/region-enum';
-import { AsyncPipe, KeyValuePipe, NgIf } from '@angular/common';
+import {
+  AsyncPipe,
+  KeyValuePipe,
+  NgIf,
+  NgOptimizedImage,
+} from '@angular/common';
 import { JOB_DISPLAY } from '../enum/job-mapping';
 import { JobsEnum } from '../enum/jobs-enum';
 import { MatIcon } from '@angular/material/icon';
@@ -18,6 +23,8 @@ import {
 import { map, Observable, startWith } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
+import { ProjectsService } from '../services/projects.service';
+import { Project } from '../interfaces/project';
 
 @Component({
   selector: 'app-annuaire',
@@ -34,6 +41,7 @@ import { MatInput } from '@angular/material/input';
     ReactiveFormsModule,
     MatInput,
     NgIf,
+    NgOptimizedImage,
   ],
   templateUrl: './annuaire.component.html',
   styleUrl: './annuaire.component.css',
@@ -56,11 +64,16 @@ export class AnnuaireComponent implements OnInit {
   filteredJobs: Observable<string[]> | undefined;
   jobArray = Object.values(JobsEnum);
   myControl = new FormControl('');
+  projects: Project[] = [];
 
-  constructor(private customersService: CustomersService) {}
+  constructor(
+    private customersService: CustomersService,
+    private projectService: ProjectsService,
+  ) {}
 
   ngOnInit(): void {
     this.customers = this.customersService.getProfessionals();
+    this.projects = this.projectService.getProjects();
     this.filteredJobs = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || '')),

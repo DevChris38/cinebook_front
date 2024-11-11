@@ -1,4 +1,4 @@
-import { Projet } from './projet';
+import { Project } from './project';
 
 export interface Customer {
   id: number;
@@ -10,5 +10,5 @@ export interface Customer {
   email: string;
   profilePicture: string;
   regions: string[];
-  projets?: Projet[];
+  projets?: Project[];
 }

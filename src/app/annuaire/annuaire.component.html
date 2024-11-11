@@ -2,7 +2,7 @@
   class="professionals-container background_style_sombre w-full h-full overflow-y-auto"
 >
   <div
-    class="w-full h-full flex flex-wrap justify-evenly pt-12 pl-[2.5vw] pr-[2.5vw]"
+    class="h-fit flex flex-wrap justify-evenly pt-40 pb-24 pl-[2.5vw] pr-[2.5vw]"
   >
     <h1 class="text-2xl">Annuaire des professionnels</h1>
     <div
@@ -24,7 +24,7 @@
           (optionSelected)="onOptionSelected($event)"
         >
           @for (jobEnumValue of filteredJobs | async; track jobEnumValue) {
-            <mat-option [value]="jobEnumValue">{{ jobEnumValue }} </mat-option>
+            <mat-option [value]="jobEnumValue">{{ jobEnumValue }}</mat-option>
           }
         </mat-autocomplete>
       </mat-form-field>
@@ -59,27 +59,54 @@
               />
             </mat-card-header>
             <mat-card-content
-              class="flex flex-wrap justify-items-center items-center h-[80%]"
+              class="flex flex-wrap justify-items-center items-center h-[80%] w-full"
             >
-              <mat-card-title class="w-full text-center"
+              <mat-card-title class="w-full text-center mb-2"
                 >{{ customer.firstName }}{{ " " }}{{ customer.lastName }}
               </mat-card-title>
-              <mat-card-subtitle class="text-center">
-                @for (jobTitle of customer.jobTitle; track $index) {
-                  {{ getMetierDisplay(jobTitle, customer.sexe) }}
-                  <ng-template [ngIf]="$index < customer.jobTitle.length - 1"
-                    >,</ng-template
-                  >
-                }
+              <mat-card-subtitle class="h-[15%]">
+                <p
+                  class="text-center flex flex-wrap justify-center items-center h-full text-[1vw]"
+                >
+                  @for (jobTitle of customer.jobTitle; track $index) {
+                    {{ getMetierDisplay(jobTitle, customer.sexe) }}
+                    <ng-template [ngIf]="$index < customer.jobTitle.length - 1"
+                      >,
+                    </ng-template>
+                  }
+                </p>
               </mat-card-subtitle>
-              <p class="text-sm">
-                @for (region of customer.regions; track $index) {
-                  {{ region }}
-                  <ng-template [ngIf]="$index < customer.regions.length - 1"
-                    >,</ng-template
-                  >
-                }
-              </p>
+              <mat-card-subtitle class="h-[15%]">
+                <p
+                  class="text-center flex flex-wrap justify-center items-center h-full text-[1vw]"
+                >
+                  @for (region of customer.regions; track $index) {
+                    {{ region }}
+                    <ng-template [ngIf]="$index < customer.regions.length - 1"
+                      >,
+                    </ng-template>
+                  }
+                </p>
+              </mat-card-subtitle>
+              <mat-card-actions class="h-[5%]">
+                <mat-icon aria-label="Mail icon" fontIcon="star"></mat-icon>
+                <mat-icon aria-label="Mail icon" fontIcon="bolt"></mat-icon>
+                <mat-icon
+                  aria-label="Mail icon"
+                  fontIcon="editor choice"
+                ></mat-icon>
+              </mat-card-actions>
+              <img
+                alt=""
+                [src]="projects[0].image"
+                class="w-full h-[30%] object-cover mt-4"
+              />
+              <figcaption class="text-sm font-bold">
+                {{ projects[0].type }}
+              </figcaption>
+              <figcaption class="text-sm">
+                {{ projects[0].name }}{{ ", " }}{{ projects[0].year }}
+              </figcaption>
             </mat-card-content>
             <mat-card-footer class="flex flex-nowrap h-[5%]">
               <a [href]="'mailto:' + customer.email">
