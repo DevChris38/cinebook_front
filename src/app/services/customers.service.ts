@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Customer } from '../interfaces/customer';
 import { RegionEnum } from '../enum/region-enum';
-import { JOB_DISPLAY } from '../enum/job-mapping';
 import { JobsEnum } from '../enum/jobs-enum';
 import { SexeEnum } from '../enum/sexe-enum';
 

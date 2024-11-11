@@ -1,4 +1,3 @@
-import { RegionEnum } from '../enum/region-enum';
 import { Projet } from './projet';
 
 export interface Customer {
