@@ -29,11 +29,11 @@ html {
 .background_style_clair {
   background-attachment: fixed;
   background: linear-gradient(
-      to bottom left,
-      rgba(23, 0, 0, 0.2) 60%,
-      rgb(244, 122, 1)
-    ),
-    linear-gradient(to bottom right, rgb(24, 0, 0) 50%, rgb(97, 208, 250));
+    to bottom left,
+    rgba(23, 0, 0, 0.2) 60%,
+    rgb(244, 122, 1)
+  ),
+  linear-gradient(to bottom right, rgb(24, 0, 0) 50%, rgb(97, 208, 250));
   background-size: 150%, 150%;
   animation: gradient 15s linear infinite;
 }
@@ -42,11 +42,11 @@ html {
   position: fixed;
   background-attachment: fixed;
   background: linear-gradient(
-      to bottom left,
-      rgba(24, 0, 0, 0) 70%,
-      rgb(38, 19, 0)
-    ),
-    linear-gradient(to bottom right, rgb(24, 0, 0) 20%, rgb(25, 53, 64));
+    to bottom left,
+    rgba(24, 0, 0, 0) 70%,
+    rgb(38, 19, 0)
+  ),
+  linear-gradient(to bottom right, rgb(24, 0, 0) 50%, rgb(25, 53, 64));
   background-size: 150vw 150vh;
   animation: gradient 15s linear infinite;
 }

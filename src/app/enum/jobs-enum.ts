@@ -2,7 +2,7 @@ export enum JobsEnum {
   ACCESSOIRISTE = 'Accessoiriste',
   ACTEUR = 'Acteur / Actrice',
   ADM_PROD = 'Administrateur / Administratrice de production',
-  /*ANIMATEUR = 'Animateur / Animatrice 2D/3D',
+  ANIMATEUR = 'Animateur / Animatrice 2D/3D',
   ASS_PROD = 'Assistant(e) de production',
   ASS_MONTEUR = 'Assistant(e) monteur / monteuse',
   ASS_REAL = 'Assistant(e) réalisateur / réalisatrice',
@@ -18,13 +18,41 @@ export enum JobsEnum {
   CONS_TECH = 'Conseiller(e) technique',
   COIF = 'Coiffeur / Coiffeuse',
   COOR_INTIM = "oordinateur / Coordinatrice d'intimité",
-  COST = 'Costumier(e)'
-Chef décorateur
-Dialoguiste
-Directeur artistique
-Directeur de casting
-Directeur de production
-Directeur de postproduction ou Superviseur de postproduction
-Directeur technique
-Distributeur*/
+  COST = 'Costumier(e)',
+  CHEF_OPP = 'Chef décorateur / décoratrice',
+  DIAG = 'Dialoguiste',
+  DIR_ART = 'Directeur / Directrice artistique',
+  DIR_CAST = 'Directeur / Directrice de casting',
+  DIR_PROD = 'Directeur / Directrice de production',
+  DIR_POST_PROD = 'Directeur / Directrice de postproduction ou Superviseur / Superviseuse de postproduction',
+  DIR_TECH = 'Directeur / Directrice technique',
+  DISTRIB = 'Distributeur / Distributrice',
+  EDIT = 'Editeur / Editrice DVD ou VOD',
+  /*ETAL = 'Etalonneur / Etalonneuse',
+  EXPLOIT = 'Exploitant(e) de salle de cinéma',
+  FIG = 'Figurant(e)',
+  GROUP = 'Groupman / Groupwoman ou Groupiste',
+  HAB = 'Habilleur / Habilleuse',
+  INGE_VIS = 'Ingénieur(e) de la vision',
+  MAQ = 'Maquilleur / Maquilleuse',
+  MIX = 'Mixeur / Mixeuse',
+  MONT = 'Monteur / Monteuse ou Chef-monteur / Chef-monteuse',
+  MONT_SON = 'Monteur / Monteuse son',
+  MUSI = 'Musicien(ne)',
+  STEAD = 'Operateur / Opératrice steadicam ou steadicameur / Steadicameuse',
+  PERCH = 'Perchman / Perchwoman',
+  PHOTO = 'Photographe de plateau',
+  ASSIST_OPE = 'Assistant(e) operateur / operatrice ou pointeur / pointeuse',
+  PROD = 'Producteur / Productrice',
+  PROJ = 'Projectionniste',
+  REAL = 'Realisateur / Realisatrice',
+  REG_GEN = 'Regisseur / Regisseuse général(e)',
+  RESP_DOUBL = 'Responsable du doublage',
+  RESP_TECH = 'Responsable technique',
+  SCEN = 'Scénariste',
+  SCRIPT = 'Scripte',
+  TECH_MAINT = 'Technicien(ne) de maintenance',
+  TRUC = 'Truqueur / Truqueuse',
+  VENT = 'Ventouseur / Ventouseuse',
+  VEND = 'Vendeur / Vendeuse international',*/
 }

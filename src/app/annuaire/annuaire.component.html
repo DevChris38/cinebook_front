@@ -9,17 +9,25 @@
       class="!border-2 !border-[#034963] !bg-[#7a3d0111] w-[90vw] h-fit my-[4vh] rounded-md flex flex-wrap justify-center items-center"
     >
       <mat-form-field class="m-2">
+
         <mat-label>Activité</mat-label>
-        <mat-select [(value)]="jobSelected">
-          <mat-option>None</mat-option>
-          @for (jobEnumValue of jobEnumValues; track $index) {
-            <mat-option value="{{ jobEnumValue }}">{{
+        <input type="text"
+               placeholder="Choisir"
+               aria-label="Activité"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto"
+               (input)="onInputChange($event)">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+          @for (jobEnumValue of filteredJobs | async; track jobEnumValue) {
+            <mat-option [value]="jobEnumValue">{{
                 jobEnumValue
               }}
             </mat-option>
           }
-        </mat-select>
+        </mat-autocomplete>
       </mat-form-field>
+
       <mat-form-field class="m-2">
         <mat-label>Région</mat-label>
         <mat-select [(value)]="regionSelected">
@@ -33,34 +41,44 @@
           }
         </mat-select>
       </mat-form-field>
+
     </div>
     <div class="w-full h-fit flex flex-wrap justify-center gap-[4vw]">
-      @for (customer of customers; track customer.phone) {
-        @if ((!jobSelected || jobSelected === customer.jobTitle) &&
+      @for (customer of customers; track $index) {
+        @if ((!jobSelected || customer.jobTitle.includes((jobSelected))) &&
         (!regionSelected || customer.regions.includes(regionSelected))) {
           <mat-card
             class="professional-card basis-[35%] flex-shrink-0 flex-grow-0 h-[60vh] p-2 flex flex-wrap justify-items-center items-center !border-2 !border-[#034963] !bg-[#7a3d0111] rounded-lg"
           >
-            <mat-card-header>
-              <mat-card-title>{{ customer.name }}</mat-card-title>
-              <mat-card-subtitle>{{ getMetierDisplay(customer.jobTitle, customer.sexe) }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content
-              class="flex flex-wrap justify-items-center items-center"
-            >
-              <p><strong>Téléphone:</strong> {{ customer.phone }}</p>
-              <p><strong>Email:</strong> {{ customer.email }}</p>
-              <p><strong>Localisation :</strong></p>
-              @for (region of customer.regions; track $index) {
-                <p>{{ region }}</p>
-              }
-            </mat-card-content>
-            <mat-card-footer>
+            <mat-card-header class="h-[15%]">
               <img
                 [src]="customer.profilePicture"
-                alt="{{ customer.name }}"
+                alt="{{ customer.firstName }}"
                 class="profile-img"
               />
+            </mat-card-header>
+            <mat-card-content
+              class="flex flex-wrap justify-items-center items-center h-[80%]"
+            >
+              <mat-card-title class="w-full text-center">{{ customer.firstName }}{{ " " }}{{ customer.lastName }}
+              </mat-card-title>
+              <mat-card-subtitle class="text-center">
+                @for (jobTitle of customer.jobTitle; track $index) {
+                  {{ getMetierDisplay(jobTitle, customer.sexe) }}
+                  <ng-template [ngIf]="$index < customer.jobTitle.length - 1">,</ng-template>
+                }</mat-card-subtitle>
+              <p class="text-sm">
+                @for (region of customer.regions; track $index) {
+                  {{ region }}
+                  <ng-template [ngIf]="$index < customer.regions.length - 1">,</ng-template>
+                }</p>
+            </mat-card-content>
+            <mat-card-footer class="flex flex-nowrap h-[5%]">
+              <a [href]="'mailto:' + customer.email">
+                <mat-icon aria-label="Mail icon" fontIcon="mail"></mat-icon>
+              </a>
+              <p class="text-[0.75rem] ml-2 pt-1">{{ customer.email }}</p>
+
             </mat-card-footer>
           </mat-card>
         }
