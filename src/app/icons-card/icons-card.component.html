@@ -1,0 +1,14 @@
+@if (isPremium()) {
+  <mat-icon
+    aria-label="Star icon"
+    fontIcon="star"
+    matTooltip="Utilisateur Premium"
+  ></mat-icon>
+}
+@if (isLongTimeAdopter()) {
+  <mat-icon
+    aria-label="Bolt icon"
+    fontIcon="bolt"
+    matTooltip="Inscrit depuis plus d'un an"
+  ></mat-icon>
+}

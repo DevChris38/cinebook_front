@@ -25,6 +25,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { ProjectsService } from '../services/projects.service';
 import { Project } from '../interfaces/project';
+import { MatTooltip } from '@angular/material/tooltip';
+import { IconsCardComponent } from '../icons-card/icons-card.component';
 
 @Component({
   selector: 'app-annuaire',
@@ -42,6 +44,8 @@ import { Project } from '../interfaces/project';
     MatInput,
     NgIf,
     NgOptimizedImage,
+    MatTooltip,
+    IconsCardComponent,
   ],
   templateUrl: './annuaire.component.html',
   styleUrl: './annuaire.component.css',

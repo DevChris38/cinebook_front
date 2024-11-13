@@ -1,20 +1,25 @@
 <header
-  class="bg-[#180000] z-50 p-6 text-xl text-white flex flex-row items-center justify-center h-28 absolute w-full"
+  class="bg-[#180000AA] backdrop-blur-md z-50 p-6 text-xl text-white flex flex-row items-center justify-center h-20 absolute w-full"
 >
   <nav class="flex flex-row items-center justify-between w-full">
     <div class="flex flex-row items-center justify-evenly gap-8 w-2/5">
-      <a>Accueil</a>
+      <a routerLink="/">Accueil</a>
       <a>Qui sommes-nous ?</a>
     </div>
-    <div class="w-16 h-16 bg-white rounded-full"></div>
+    <img
+      src="/logo_cinebook_full_blanc.svg"
+      alt="logo_blanc"
+      height="80"
+      width="80"
+    />
     <div class="flex flex-row items-center justify-evenly gap-8 w-2/5">
-      <a>Nos clients</a>
+      <a routerLink="/annuaire">Nos clients</a>
       <button (click)="login()">Se connecter / s'inscrire</button>
     </div>
   </nav>
 </header>
 <router-outlet />
-<footer class="bg-[#180000] h-20 fixed bottom-0 w-full">
+<footer class="bg-[#180000AA] backdrop-blur-md h-20 fixed bottom-0 w-full">
   <div class="flex items-center justify-evenly w-full h-full">
     <h2>Cinebook - 2024</h2>
     <p>Tous droits réservés</p>

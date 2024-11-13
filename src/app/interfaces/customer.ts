@@ -11,4 +11,6 @@ export interface Customer {
   profilePicture: string;
   regions: string[];
   projets?: Project[];
+  isLongTimeAdopter: boolean;
+  isPremium: boolean;
 }

@@ -19,6 +19,8 @@ export class CustomersService {
         email: 'jean.dupont@filmprod.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/1.jpg',
         regions: [RegionEnum.REGION_BRE, RegionEnum.REGION_CVL],
+        isLongTimeAdopter: true,
+        isPremium: false,
       },
       {
         id: 2,
@@ -29,7 +31,15 @@ export class CustomersService {
         phone: '0987654321',
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/2.jpg',
-        regions: [RegionEnum.REGION_BRE, RegionEnum.REGION_BFC],
+        regions: [
+          RegionEnum.REGION_BRE,
+          RegionEnum.REGION_BFC,
+          RegionEnum.REGION_20R,
+          RegionEnum.REGION_HDF,
+          RegionEnum.REGION_OCC,
+        ],
+        isLongTimeAdopter: true,
+        isPremium: true,
       },
       {
         id: 3,
@@ -41,6 +51,8 @@ export class CustomersService {
         email: 'luc.martin@soundworks.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/2.jpg',
         regions: [RegionEnum.REGION_BRE, RegionEnum.REGION_20R],
+        isLongTimeAdopter: true,
+        isPremium: false,
       },
       {
         id: 4,
@@ -52,6 +64,8 @@ export class CustomersService {
         email: 'jean.dupont@filmprod.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/3.jpg',
         regions: [RegionEnum.REGION_BRE, RegionEnum.REGION_GES],
+        isLongTimeAdopter: false,
+        isPremium: false,
       },
       {
         id: 5,
@@ -68,6 +82,8 @@ export class CustomersService {
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/1.jpg',
         regions: [RegionEnum.REGION_IDF, RegionEnum.REGION_GLP],
+        isLongTimeAdopter: true,
+        isPremium: false,
       },
       {
         id: 6,
@@ -79,6 +95,8 @@ export class CustomersService {
         email: 'luc.martin@soundworks.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/4.jpg',
         regions: [RegionEnum.REGION_IDF, RegionEnum.REGION_GUF],
+        isLongTimeAdopter: true,
+        isPremium: true,
       },
       {
         id: 7,
@@ -90,6 +108,8 @@ export class CustomersService {
         email: 'jean.dupont@filmprod.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/5.jpg',
         regions: [RegionEnum.REGION_IDF, RegionEnum.REGION_HDF],
+        isLongTimeAdopter: false,
+        isPremium: false,
       },
       {
         id: 8,
@@ -101,6 +121,8 @@ export class CustomersService {
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/3.jpg',
         regions: [RegionEnum.REGION_IDF, RegionEnum.REGION_MTQ],
+        isLongTimeAdopter: true,
+        isPremium: false,
       },
       {
         id: 9,
@@ -112,6 +134,8 @@ export class CustomersService {
         email: 'luc.martin@soundworks.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/6.jpg',
         regions: [RegionEnum.REGION_ARA, RegionEnum.REGION_MYT],
+        isLongTimeAdopter: true,
+        isPremium: false,
       },
       {
         id: 10,
@@ -123,6 +147,8 @@ export class CustomersService {
         email: 'jean.dupont@filmprod.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/7.jpg',
         regions: [RegionEnum.REGION_ARA, RegionEnum.REGION_NAQ],
+        isLongTimeAdopter: true,
+        isPremium: true,
       },
       {
         id: 11,
@@ -134,6 +160,8 @@ export class CustomersService {
         email: 'marie.durand@poststudio.com',
         profilePicture: 'https://randomuser.me/api/portraits/women/4.jpg',
         regions: [RegionEnum.REGION_ARA, RegionEnum.REGION_NOR],
+        isLongTimeAdopter: true,
+        isPremium: false,
       },
       {
         id: 12,
@@ -145,6 +173,8 @@ export class CustomersService {
         email: 'luc.martin@soundworks.com',
         profilePicture: 'https://randomuser.me/api/portraits/men/8.jpg',
         regions: [RegionEnum.REGION_ARA, RegionEnum.REGION_OCC],
+        isLongTimeAdopter: false,
+        isPremium: false,
       },
     ];
   }

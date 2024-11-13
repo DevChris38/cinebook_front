@@ -6,7 +6,7 @@
   >
     <h1 class="text-2xl">Annuaire des professionnels</h1>
     <div
-      class="!border-2 !border-[#034963] !bg-[#7a3d0111] w-[90vw] h-fit my-[4vh] rounded-md flex flex-wrap justify-center items-center"
+      class="w-[90vw] h-fit my-[4vh] rounded-md flex flex-wrap justify-center items-center"
     >
       <mat-form-field class="m-2">
         <mat-label>Activité</mat-label>
@@ -49,25 +49,40 @@
           (!regionSelected || customer.regions.includes(regionSelected))
         ) {
           <mat-card
-            class="professional-card basis-[35%] flex-shrink-0 flex-grow-0 h-[60vh] p-2 flex flex-wrap justify-items-center items-center !border-2 !border-[#034963] !bg-[#7a3d0111] rounded-lg"
+            class="professional-card basis-[35%] flex-shrink-0 flex-grow-0 h-[60vh] p-2 flex flex-wrap justify-items-center items-center !border-4 !border-[#edf4f7] !bg-[#130e06] !rounded-[20px]"
           >
-            <mat-card-header class="h-[15%]">
+            <div class="h-[20%] w-full flex flex-nowrap justify-between">
+              <div class="w-1/4 flex flex-row">
+                <a [href]="'mailto:' + customer.email">
+                  <mat-icon
+                    aria-label="Mail icon"
+                    fontIcon="mail"
+                    [matTooltip]="customer.email"
+                  ></mat-icon>
+                </a>
+              </div>
               <img
                 [src]="customer.profilePicture"
                 alt="{{ customer.firstName }}"
                 class="profile-img"
               />
-            </mat-card-header>
+              <div class="w-1/4 flex flex-row-reverse">
+                <app-icons-card
+                  [isLongTimeAdopter]="customer.isLongTimeAdopter"
+                  [isPremium]="customer.isPremium"
+                />
+              </div>
+            </div>
             <mat-card-content
-              class="flex flex-wrap justify-items-center items-center h-[80%] w-full"
+              class="flex flex-wrap justify-items-center items-center h-[75%] w-full"
             >
-              <mat-card-title class="w-full text-center mb-2"
+              <mat-card-title class="w-full text-center"
                 >{{ customer.firstName }}{{ " " }}{{ customer.lastName }}
               </mat-card-title>
-              <mat-card-subtitle class="h-[15%]">
-                <p
-                  class="text-center flex flex-wrap justify-center items-center h-full text-[1vw]"
-                >
+              <mat-card-subtitle
+                class="h-[12%] flex flex-wrap justify-start items-start"
+              >
+                <p class="text-center h-full text-[1.1vw] leading-4">
                   @for (jobTitle of customer.jobTitle; track $index) {
                     {{ getMetierDisplay(jobTitle, customer.sexe) }}
                     <ng-template [ngIf]="$index < customer.jobTitle.length - 1"
@@ -76,9 +91,9 @@
                   }
                 </p>
               </mat-card-subtitle>
-              <mat-card-subtitle class="h-[15%]">
+              <mat-card-subtitle class="h-[40%]">
                 <p
-                  class="text-center flex flex-wrap justify-center items-center h-full text-[1vw]"
+                  class="text-center h-[50%] flex flex-nowrap justify-center w-full text-[1vw]"
                 >
                   @for (region of customer.regions; track $index) {
                     {{ region }}
@@ -87,15 +102,12 @@
                     </ng-template>
                   }
                 </p>
+                <p class="text-sm">
+                  lorem ipsum toto tata titi tutu tete, lorem ipsum toto tata
+                  titi tutu tete, lorem ipsum toto tata, lorem ipsum toto tata
+                  titi tutu tete, lorem ipsum toto tata titi tutu tete
+                </p>
               </mat-card-subtitle>
-              <mat-card-actions class="h-[5%]">
-                <mat-icon aria-label="Mail icon" fontIcon="star"></mat-icon>
-                <mat-icon aria-label="Mail icon" fontIcon="bolt"></mat-icon>
-                <mat-icon
-                  aria-label="Mail icon"
-                  fontIcon="editor choice"
-                ></mat-icon>
-              </mat-card-actions>
               <img
                 alt=""
                 [src]="projects[0].image"
@@ -108,12 +120,6 @@
                 {{ projects[0].name }}{{ ", " }}{{ projects[0].year }}
               </figcaption>
             </mat-card-content>
-            <mat-card-footer class="flex flex-nowrap h-[5%]">
-              <a [href]="'mailto:' + customer.email">
-                <mat-icon aria-label="Mail icon" fontIcon="mail"></mat-icon>
-              </a>
-              <p class="text-[0.75rem] ml-2 pt-1">{{ customer.email }}</p>
-            </mat-card-footer>
           </mat-card>
         }
       }
