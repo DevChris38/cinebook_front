@@ -1,0 +1,35 @@
+<div class="login-container background_style_sombre w-full h-full overflow-y-auto">
+  <mat-card class="login-card !border-4 !border-[#edf4f7] !bg-[#130e06] !rounded-[20px]">
+    <mat-card-header>
+      <mat-card-title>Connexion</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label class="!text-amber-50">Nom d'utilisateur</mat-label>
+          <input matInput type="text" formControlName="userName" required autocomplete="username"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" formControlName="password" required autocomplete="current-password"/>
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <mat-error>
+              Le mot de passe est requis.
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">
+          Se connecter
+        </button>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button color="accent">Créer un compte</button>
+      <button mat-button color="warn">Mot de passe oublié ?</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
