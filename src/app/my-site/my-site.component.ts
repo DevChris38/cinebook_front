@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerInformations } from '../../customer-informations';
 
 @Component({
-  selector: 'app-my-site',
-  standalone: true,
-  imports: [],
-  templateUrl: './my-site.component.html',
-  styleUrl: './my-site.component.css',
+    selector: 'app-my-site',
+    imports: [],
+    templateUrl: './my-site.component.html',
+    styleUrl: './my-site.component.css'
 })
 export class MySiteComponent implements OnInit {
   ngOnInit() {

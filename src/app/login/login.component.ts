@@ -21,26 +21,25 @@ import { AuthInterceptor } from '../services/AuthInterceptor';
 import { MatInput } from '@angular/material/input';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardContent,
-    ReactiveFormsModule,
-    MatFormField,
-    MatCardActions,
-    MatButton,
-    MatError,
-    MatLabel,
-    MatCardTitle,
-    MatInput,
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  ],
+    selector: 'app-login',
+    imports: [
+        MatCard,
+        MatCardHeader,
+        MatCardContent,
+        ReactiveFormsModule,
+        MatFormField,
+        MatCardActions,
+        MatButton,
+        MatError,
+        MatLabel,
+        MatCardTitle,
+        MatInput,
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ]
 })
 export class LoginComponent {
   loginForm: FormGroup;

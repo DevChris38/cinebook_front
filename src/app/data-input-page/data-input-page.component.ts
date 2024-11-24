@@ -13,23 +13,22 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FirebaseStorageService } from '../services/firebase-storage.service';
 
 @Component({
-  selector: 'app-data-input-page',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatIcon,
-    MatSelect,
-    MatOption,
-    MatAnchor,
-    MatDivider,
-    ReactiveFormsModule,
-    RouterLink,
-    MatButton,
-    ImageCropperComponent,
-  ],
-  templateUrl: './data-input-page.component.html',
-  styleUrl: './data-input-page.component.css',
+    selector: 'app-data-input-page',
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        MatIcon,
+        MatSelect,
+        MatOption,
+        MatAnchor,
+        MatDivider,
+        ReactiveFormsModule,
+        RouterLink,
+        MatButton,
+        ImageCropperComponent,
+    ],
+    templateUrl: './data-input-page.component.html',
+    styleUrl: './data-input-page.component.css'
 })
 export class DataInputPageComponent {
   imageChangedEvent: Event | null = null;
