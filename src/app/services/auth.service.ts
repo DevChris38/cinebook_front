@@ -6,9 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  constructor(private http: HttpClient) {}
+
   private apiUrl = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {}
+  token: string | null = null;
 
   login(username: string, password: string): Observable<any> {
     const headers = new HttpHeaders({
@@ -16,6 +18,6 @@ export class AuthService {
     });
 
     console.log('toto');
-    return this.http.get(`${this.apiUrl}/api/url/1`, { headers });
+    return this.http.get(`${this.apiUrl}/api/account/login`, { headers });
   }
 }
