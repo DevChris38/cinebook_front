@@ -21,25 +21,26 @@ import { AuthInterceptor } from '../services/AuthInterceptor';
 import { MatInput } from '@angular/material/input';
 
 @Component({
-    selector: 'app-login',
-    imports: [
-        MatCard,
-        MatCardHeader,
-        MatCardContent,
-        ReactiveFormsModule,
-        MatFormField,
-        MatCardActions,
-        MatButton,
-        MatError,
-        MatLabel,
-        MatCardTitle,
-        MatInput,
-    ],
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.css',
-    providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    ]
+  selector: 'app-login',
+  imports: [
+    MatCard,
+    MatCardHeader,
+    MatCardContent,
+    ReactiveFormsModule,
+    MatFormField,
+    MatCardActions,
+    MatButton,
+    MatError,
+    MatLabel,
+    MatCardTitle,
+    MatInput,
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  standalone: true,
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -63,7 +64,8 @@ export class LoginComponent {
       console.log('Password:', password);
       this.authService.login(userName, password).subscribe({
         next: (response) => {
-          console.log('Réponse :', response);
+          console.log('toto');
+          this.router.navigate(['/pageperso', response.userName]);
         },
         error: (error) => {
           console.error('Erreur :', error);

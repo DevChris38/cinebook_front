@@ -5,8 +5,10 @@ import { MySiteComponent } from './my-site/my-site.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { AnnuaireComponent } from './annuaire/annuaire.component';
 import { LoginComponent } from './login/login.component';
+import { PagePersoComponent } from './page-perso/page-perso.component';
 
 export const routes: Routes = [
+  { path: 'pageperso/:userName', component: PagePersoComponent },
   { path: 'login', component: LoginComponent },
   { path: 'mysite', component: MySiteComponent },
   { path: 'annuaire', component: AnnuaireComponent },

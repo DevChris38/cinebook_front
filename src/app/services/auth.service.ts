@@ -13,11 +13,17 @@ export class AuthService {
   token: string | null = null;
 
   login(username: string, password: string): Observable<any> {
+    const body = {
+      username: username,
+      password: password,
+    };
+
     const headers = new HttpHeaders({
-      Authorization: 'Basic ' + btoa(username + ':' + password),
+      'Content-Type': 'application/json',
     });
 
-    console.log('toto');
-    return this.http.get(`${this.apiUrl}/api/account/login`, { headers });
+    return this.http.post(`${this.apiUrl}/api/account/login`, body, {
+      headers,
+    });
   }
 }
