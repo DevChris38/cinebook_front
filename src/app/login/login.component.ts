@@ -64,8 +64,10 @@ export class LoginComponent {
       console.log('Password:', password);
       this.authService.login(userName, password).subscribe({
         next: (response) => {
-          console.log('toto');
-          this.router.navigate(['/pageperso', response.userName]);
+          const jwt = response.headers.get('Authorization').slice(7);
+          console.log(response);
+          this.authService.setToken(jwt, response.body.userName);
+          this.router.navigate(['/pageperso', response.body.userName]);
         },
         error: (error) => {
           console.error('Erreur :', error);

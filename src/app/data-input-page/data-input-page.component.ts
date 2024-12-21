@@ -1,5 +1,9 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatFormField,
+  MatFormFieldModule,
+  MatLabel,
+} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -13,22 +17,11 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FirebaseStorageService } from '../services/firebase-storage.service';
 
 @Component({
-    selector: 'app-data-input-page',
-    imports: [
-        MatFormFieldModule,
-        MatInputModule,
-        MatIcon,
-        MatSelect,
-        MatOption,
-        MatAnchor,
-        MatDivider,
-        ReactiveFormsModule,
-        RouterLink,
-        MatButton,
-        ImageCropperComponent,
-    ],
-    templateUrl: './data-input-page.component.html',
-    styleUrl: './data-input-page.component.css'
+  selector: 'app-data-input-page',
+  imports: [ImageCropperComponent, MatLabel, MatFormField, ReactiveFormsModule],
+  templateUrl: './data-input-page.component.html',
+  standalone: true,
+  styleUrl: './data-input-page.component.css',
 })
 export class DataInputPageComponent {
   imageChangedEvent: Event | null = null;
@@ -80,7 +73,7 @@ export class DataInputPageComponent {
     }
   }
 
-  photoAccueilCropped(event: ImageCroppedEvent) {
+  photoAccueilCropped(event: any) {
     if (event.objectUrl != null) {
       this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(
         event.objectUrl,

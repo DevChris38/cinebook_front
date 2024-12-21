@@ -29,33 +29,19 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { IconsCardComponent } from '../icons-card/icons-card.component';
 
 @Component({
-    selector: 'app-annuaire',
-    imports: [
-        MatCardModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        KeyValuePipe,
-        MatIcon,
-        MatAutocompleteTrigger,
-        MatAutocomplete,
-        AsyncPipe,
-        ReactiveFormsModule,
-        MatInput,
-        NgIf,
-        NgOptimizedImage,
-        MatTooltip,
-        IconsCardComponent,
-    ],
-    templateUrl: './annuaire.component.html',
-    styleUrl: './annuaire.component.css',
-    providers: [
-        {
-            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-            useValue: {
-                subscriptSizing: 'dynamic',
-            },
-        },
-    ]
+  selector: 'app-annuaire',
+  imports: [],
+  templateUrl: './annuaire.component.html',
+  styleUrl: './annuaire.component.css',
+  standalone: true,
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        subscriptSizing: 'dynamic',
+      },
+    },
+  ],
 })
 export class AnnuaireComponent implements OnInit {
   protected readonly RegionEnum = RegionEnum;
@@ -75,7 +61,7 @@ export class AnnuaireComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.customers = this.customersService.getProfessionals();
+    this.customers = [];
     this.projects = this.projectService.getProjects();
     this.filteredJobs = this.myControl.valueChanges.pipe(
       startWith(''),

@@ -12,15 +12,17 @@ export function authInterceptor(
   req: HttpRequest<unknown>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> {
-  const auth = inject(AuthService);
-  const token = auth.token;
+  const token = localStorage.getItem('access_token');
 
   if (!token) {
+    console.log("il n'y a pas de token");
     return next(req);
   }
 
+  console.log('token : ' + token);
+
   const headers = new HttpHeaders({
-    Authorization: token,
+    Authorization: 'Bearer ' + token,
   });
 
   const newReq = req.clone({

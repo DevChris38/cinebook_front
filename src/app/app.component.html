@@ -14,7 +14,12 @@
     />
     <div class="flex flex-row items-center justify-evenly gap-8 w-2/5">
       <a routerLink="/annuaire">Nos clients</a>
-      <button routerLink="/login">Se connecter / s'inscrire</button>
+      @if (isConnected()) {
+        <button (click)="onProfil()">Mon compte</button>
+        <button (click)="onDeconnection()">Se déconnecter</button>
+      } @else {
+        <button routerLink="/login">Se connecter / s'inscrire</button>
+      }
     </div>
   </nav>
 </header>
