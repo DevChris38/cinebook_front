@@ -6,8 +6,10 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { AnnuaireComponent } from './annuaire/annuaire.component';
 import { LoginComponent } from './login/login.component';
 import { PagePersoComponent } from './page-perso/page-perso.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 export const routes: Routes = [
+  { path: 'inscription', component: InscriptionComponent },
   { path: 'pageperso/:userName', component: PagePersoComponent },
   { path: 'login', component: LoginComponent },
   { path: 'mysite', component: MySiteComponent },

@@ -1,0 +1,112 @@
+<div class="inscription-container background_style_sombre w-full h-full pt-[10vh] overflow-y-auto">
+  <div class="h-[78dvh] w-full text-amber-50 flex flex-col items-start flex-wrap mt-[2dvh]  ">
+    <div class="w-full h-[17dvh] flex items-center justify-center flex-nowrap flex-col  ">
+      <h2>Bienvenue sur Cinébook</h2>
+      <h2>Veuillez remplir les champs suivants pour pouvoir bénéficier des services du
+        site.</h2>
+    </div>
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()"
+          class="h-[60dvh] w-full flex flex-wrap justify-around">
+      <div class="h-[90%] w-[33%] flex justify-center items-center flex-wrap">
+        <mat-form-field class="w-[80%] form-group">
+          <mat-label>Prénom :</mat-label>
+          <input matInput formControlName="firstname" class="form-control"/>
+        </mat-form-field>
+
+        <mat-form-field class="w-[80%] form-group">
+          <mat-label>Nom :</mat-label>
+          <input matInput formControlName="lastname" class="form-control"/>
+        </mat-form-field>
+
+        <mat-form-field class="w-[80%] form-group">
+          <mat-label>Sexe :</mat-label>
+          <mat-select formControlName="sexe">
+            @for (sexe of sexeKeysArray; track $index) {
+              <mat-option [value]="sexe">{{ sexeValuesArray[sexeKeysArray.indexOf(sexe)] }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="w-[80%] form-group">
+          <mat-label>Téléphone :</mat-label>
+          <input matInput formControlName="phone" class="form-control"/>
+        </mat-form-field>
+
+        <mat-form-field class="w-[80%] form-group">
+          <mat-label>Email :</mat-label>
+          <input matInput formControlName="email" type="email" class="form-control"/>
+        </mat-form-field>
+
+      </div>
+      <div class="h-[90%] w-[33%] flex justify-center items-center flex-wrap">
+        <mat-form-field class="w-[80%]">
+          <mat-label>métiers</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Job selection" formArrayName="jobTitle">
+            @for (job of jobs(); track $index) {
+              <mat-chip-row (removed)="removeJob(job)">
+                {{ jobsValuesArray[jobsKeysArray.indexOf(job)] }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+            <input
+              #inputJob
+              placeholder="ajouter un métier"
+              [matChipInputFor]="chipGrid"
+              [matAutocomplete]="auto"
+              [formControl]="jobControl"
+              matInput
+            />
+          </mat-chip-grid>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedJob($event)">
+            @for (job of filteredOptions | async; track $index) {
+              <mat-option [value]="job">
+                {{ job }}
+              </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="w-[80%]">
+          <mat-label>régions</mat-label>
+          <mat-chip-grid #chipGridRegion aria-label="Region selection" formArrayName="regions">
+            @for (region of regionSignal(); track $index) {
+              <mat-chip-row (removed)="removeRegion(region)">
+                {{ regionsValuesArray[regionsKeysArray.indexOf(region)] }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+            <input
+              #inputRegion
+              placeholder="ajouter une région"
+              [matChipInputFor]="chipGridRegion"
+              [matAutocomplete]="autoRegion"
+              [formControl]="regionControl"
+              matInput
+            />
+          </mat-chip-grid>
+          <mat-autocomplete #autoRegion="matAutocomplete" (optionSelected)="selectedRegion($event)">
+            @for (region of filteredOptionsRegions | async; track $index) {
+              <mat-option [value]="region">
+                {{ region }}
+              </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div class="h-[90%] w-[33%] flex justify-center items-center flex-wrap">
+        @if (customerData!.imgProfil === null) {
+          <h2>Votre photo</h2>
+        } @else {
+          <img class="rounded-full h-[12vh] w-[12vh]" src="{{customerData!.imgProfil}}" alt=""/>
+        }
+
+      </div>
+      <button type="submit" class="btn btn-primary w-full text-center">Enregistrer</button>
+    </form>
+  </div>
+</div>

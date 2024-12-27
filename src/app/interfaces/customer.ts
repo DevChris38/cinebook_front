@@ -28,6 +28,18 @@ export interface DTOCustomerUpdate {
   projets?: Project[];
 }
 
+export interface DTOCustomerCreation {
+  firstname: string | null;
+  lastname: string | null;
+  sexe: 'masculin' | 'feminin' | null;
+  jobs: string[] | null;
+  phone?: string | null;
+  email: string | null;
+  imgProfil: string | null;
+  regions: string[] | null;
+  projets?: Project[] | null;
+}
+
 export function mapDtoToCustomer(dto: any): Customer {
   return {
     id: dto.id,

@@ -75,4 +75,8 @@ export class LoginComponent {
       });
     }
   }
+
+  onCreateAccount() {
+    this.router.navigate(['/inscription']);
+  }
 }
