@@ -1,4 +1,4 @@
-<!--<div
+<div
   class="professionals-container background_style_sombre w-full h-full overflow-y-auto"
 >
   <div
@@ -36,7 +36,7 @@
 
           @for (regionEnumValue of regionEnumValues; track $index) {
             <mat-option value="{{ regionEnumValue }}"
-              >{{ regionEnumValue }}
+            >{{ regionEnumValue }}
             </mat-option>
           }
         </mat-select>
@@ -44,10 +44,8 @@
     </div>
     <div class="w-full h-fit flex flex-wrap justify-center gap-[4vw]">
       @for (customer of customers; track $index) {
-        @if (
-          (!jobSelected || customer.jobTitle.includes(jobSelected)) &&
-          (!regionSelected || customer.regions.includes(regionSelected))
-        ) {
+        @if ((!jobSelected || customer.jobs.includes(jobSelected)) &&
+        (!regionSelected || customer.regions.includes(regionSelected))) {
           <mat-card
             class="professional-card basis-[35%] flex-shrink-0 flex-grow-0 h-[60vh] p-2 flex flex-wrap justify-items-center items-center !border-4 !border-[#edf4f7] !bg-[#130e06] !rounded-[20px]"
           >
@@ -62,13 +60,13 @@
                 </a>
               </div>
               <img
-                [src]="customer.profilePicture"
-                alt="{{ customer.firstName }}"
+                [src]="customer.imgProfil"
+                alt="{{ customer.firstname }}"
                 class="profile-img"
               />
               <div class="w-1/4 flex flex-row-reverse">
                 <app-icons-card
-                  [isLongTimeAdopter]="customer.isLongTimeAdopter"
+                  [isLongTimeAdopter]="false"
                   [isPremium]="customer.isPremium"
                 />
               </div>
@@ -77,16 +75,16 @@
               class="flex flex-wrap justify-items-center items-center h-[75%] w-full"
             >
               <mat-card-title class="w-full text-center"
-                >{{ customer.firstName }}{{ " " }}{{ customer.lastName }}
+              >{{ customer.firstname }}{{ " " }}{{ customer.lastname }}
               </mat-card-title>
               <mat-card-subtitle
                 class="h-[12%] flex flex-wrap justify-start items-start"
               >
                 <p class="text-center h-full text-[1.1vw] leading-4">
-                  @for (jobTitle of customer.jobTitle; track $index) {
+                  @for (jobTitle of customer.jobs; track $index) {
                     {{ getMetierDisplay(jobTitle, customer.sexe) }}
-                    <ng-template [ngIf]="$index < customer.jobTitle.length - 1"
-                      >,
+                    <ng-template [ngIf]="$index < customer.jobs.length - 1"
+                    >,
                     </ng-template>
                   }
                 </p>
@@ -96,9 +94,9 @@
                   class="text-center h-[50%] flex flex-nowrap justify-center w-full text-[1vw]"
                 >
                   @for (region of customer.regions; track $index) {
-                    {{ region }}
+                    {{ getRegionName(region) }}
                     <ng-template [ngIf]="$index < customer.regions.length - 1"
-                      >,
+                    >,
                     </ng-template>
                   }
                 </p>
@@ -126,4 +124,3 @@
     </div>
   </div>
 </div>
--->

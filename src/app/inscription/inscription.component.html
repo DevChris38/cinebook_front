@@ -19,6 +19,20 @@
         </mat-form-field>
 
         <mat-form-field class="w-[80%] form-group">
+          <mat-label>nom d'utilisateur :</mat-label>
+          <input matInput formControlName="username" type="text" class="form-control"/>
+        </mat-form-field>
+
+        <mat-form-field class="w-[80%] form-group">
+          <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password"
+                 required>
+          <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          @if (!passwordInput?.value) {
+            <mat-hint>Enter your password</mat-hint>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="w-[80%] form-group">
           <mat-label>Sexe :</mat-label>
           <mat-select formControlName="sexe">
             @for (sexe of sexeKeysArray; track $index) {
@@ -26,8 +40,8 @@
             }
           </mat-select>
         </mat-form-field>
-
-
+      </div>
+      <div class="h-[90%] w-[33%] flex justify-center items-center flex-wrap">
         <mat-form-field class="w-[80%] form-group">
           <mat-label>Téléphone :</mat-label>
           <input matInput formControlName="phone" class="form-control"/>
@@ -37,9 +51,6 @@
           <mat-label>Email :</mat-label>
           <input matInput formControlName="email" type="email" class="form-control"/>
         </mat-form-field>
-
-      </div>
-      <div class="h-[90%] w-[33%] flex justify-center items-center flex-wrap">
         <mat-form-field class="w-[80%]">
           <mat-label>métiers</mat-label>
           <mat-chip-grid #chipGrid aria-label="Job selection" formArrayName="jobTitle">
@@ -99,12 +110,32 @@
         </mat-form-field>
       </div>
       <div class="h-[90%] w-[33%] flex justify-center items-center flex-wrap">
-        @if (customerData!.imgProfil === null) {
-          <h2>Votre photo</h2>
-        } @else {
-          <img class="rounded-full h-[12vh] w-[12vh]" src="{{customerData!.imgProfil}}" alt=""/>
-        }
-
+        <div class="mt-12 flex flex-col w-1/4 h-144">
+          <label class="text-center" htmlFor="photoPortrait"
+          >petite photo portrait</label
+          >
+          <div class="flex justify-evenly">
+            <input
+              type="file"
+              (change)="fileChangeEvent($event)"
+              id="photoPortrait"
+              formControlName="imgProfil"
+            />
+          </div>
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1 / 1"
+            [roundCropper]="true"
+            format="png"
+            (imageCropped)="photoPortraitCropped($event)"
+            class="h-5/6"
+            [hidden]="!photoPortraitIsLoaded()"
+          ></image-cropper>
+          @if (photoPortraitBlob) {
+            <img [src]="photoPortraitBlob"/>
+          }
+        </div>
       </div>
       <button type="submit" class="btn btn-primary w-full text-center">Enregistrer</button>
     </form>

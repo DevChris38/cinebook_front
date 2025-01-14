@@ -125,7 +125,7 @@ export class PagePersoComponent implements OnInit {
         this.customerData = mapDtoToCustomer(data);
         console.log(this.customerData);
         this.initializeForm();
-        this.jobs = signal(this.customerData.jobTitle);
+        this.jobs = signal(this.customerData.jobs);
         this.regionSignal = signal(this.customerData.regions);
       },
       error: (e) => console.error(e),
@@ -156,7 +156,7 @@ export class PagePersoComponent implements OnInit {
         firstname: [this.customerData.firstname],
         lastname: [this.customerData.lastname],
         sexe: [this.customerData.sexe],
-        jobTitle: [this.customerData.jobTitle],
+        jobs: [this.customerData.jobs],
         phone: [this.customerData.phone],
         email: [this.customerData.email],
         imgProfil: [this.customerData.imgProfil],

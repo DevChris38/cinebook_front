@@ -1,9 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomersService } from '../services/customers.service';
 import { Customer } from '../interfaces/customer';
-import { MatCardModule } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardModule,
+  MatCardSubtitle,
+  MatCardTitle,
+} from '@angular/material/card';
+import {
+  MatFormField,
+  MatOption,
+  MatSelect,
+  MatSelectModule,
+} from '@angular/material/select';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RegionEnum } from '../enum/region-enum';
 import {
@@ -27,10 +38,30 @@ import { ProjectsService } from '../services/projects.service';
 import { Project } from '../interfaces/project';
 import { MatTooltip } from '@angular/material/tooltip';
 import { IconsCardComponent } from '../icons-card/icons-card.component';
+import { UserFilterRequestDTO } from '../interfaces/UserFilterRequestDTO';
+import { SexeEnum } from '../enum/sexe-enum';
 
 @Component({
   selector: 'app-annuaire',
-  imports: [],
+  imports: [
+    MatFormField,
+    ReactiveFormsModule,
+    MatAutocompleteTrigger,
+    MatAutocomplete,
+    MatOption,
+    MatSelect,
+    MatCard,
+    AsyncPipe,
+    MatIcon,
+    MatTooltip,
+    IconsCardComponent,
+    MatCardContent,
+    MatCardTitle,
+    MatCardSubtitle,
+    NgIf,
+    MatLabel,
+    MatInput,
+  ],
   templateUrl: './annuaire.component.html',
   styleUrl: './annuaire.component.css',
   standalone: true,
@@ -46,6 +77,7 @@ import { IconsCardComponent } from '../icons-card/icons-card.component';
 export class AnnuaireComponent implements OnInit {
   protected readonly RegionEnum = RegionEnum;
   protected readonly JOB_DISPLAY = JOB_DISPLAY;
+  protected readonly SexeEnum = SexeEnum;
   protected readonly JobsEnum = JobsEnum;
   customers: Customer[] = [];
   jobSelected = '';
@@ -54,6 +86,7 @@ export class AnnuaireComponent implements OnInit {
   jobArray = Object.values(JobsEnum);
   myControl = new FormControl('');
   projects: Project[] = [];
+  filter: UserFilterRequestDTO = {};
 
   constructor(
     private customersService: CustomersService,
@@ -61,7 +94,12 @@ export class AnnuaireComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.customers = [];
+    this.customersService.getFilteredUsers(this.filter).subscribe({
+      next: (customerList) => {
+        this.customers = customerList;
+        console.log(this.customers);
+      },
+    });
     this.projects = this.projectService.getProjects();
     this.filteredJobs = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -71,9 +109,9 @@ export class AnnuaireComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.jobArray.filter((option) =>
-      option.toLowerCase().includes(filterValue),
-    );
+    return this.jobArray.filter((option) => {
+      option.toLowerCase().includes(filterValue);
+    });
   }
 
   onInputChange(event: Event) {
@@ -105,7 +143,18 @@ export class AnnuaireComponent implements OnInit {
     return Object.values(this.JobsEnum);
   }
 
-  getMetierDisplay(job: string, sexe: 'masculin' | 'feminin'): string {
-    return JOB_DISPLAY[job as keyof typeof JOB_DISPLAY][sexe];
+  getMetierDisplay(job: string, sexe: 'MASC' | 'FEM'): string {
+    let sexeName = this.getSexeName(sexe);
+    const jobEnumKey = JobsEnum[job as keyof typeof JobsEnum];
+    console.log(JOB_DISPLAY[jobEnumKey as keyof typeof JOB_DISPLAY][sexeName]);
+    return JOB_DISPLAY[jobEnumKey as keyof typeof JOB_DISPLAY][sexeName];
+  }
+
+  getRegionName(region: string): string {
+    return this.RegionEnum[region as keyof typeof RegionEnum];
+  }
+
+  getSexeName(sexe: 'MASC' | 'FEM'): 'masculin' | 'feminin' {
+    return this.SexeEnum[sexe as keyof typeof SexeEnum];
   }
 }

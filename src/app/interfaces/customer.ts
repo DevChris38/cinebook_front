@@ -4,8 +4,8 @@ export interface Customer {
   id: number;
   firstname: string;
   lastname: string;
-  sexe: 'masculin' | 'feminin';
-  jobTitle: string[];
+  sexe: 'MASC' | 'FEM';
+  jobs: string[];
   phone?: string;
   email: string;
   imgProfil: string;
@@ -19,7 +19,7 @@ export interface DTOCustomerUpdate {
   id: number;
   firstname: string;
   lastname: string;
-  sexe: 'masculin' | 'feminin';
+  sexe: 'MASC' | 'FEM';
   jobs: string[];
   phone?: string;
   email: string;
@@ -31,7 +31,9 @@ export interface DTOCustomerUpdate {
 export interface DTOCustomerCreation {
   firstname: string | null;
   lastname: string | null;
-  sexe: 'masculin' | 'feminin' | null;
+  username: string | null;
+  password: string | null;
+  sexe: 'MASC' | 'FEM' | null;
   jobs: string[] | null;
   phone?: string | null;
   email: string | null;
@@ -51,10 +53,34 @@ export function mapDtoToCustomer(dto: any): Customer {
     email: dto.email,
     inscriptionDate: dto.inscriptionDate,
     isPremium: dto.isPremium,
-    jobTitle: dto.jobs,
+    jobs: dto.jobs,
     regions: dto.regions,
     projets: [], // Champs supplémentaires (à adapter selon besoin)
   };
+}
+
+export function mapCustomerToDTOCustomerCreation(
+  Customer: any,
+): DTOCustomerCreation {
+  const dto: DTOCustomerCreation = {
+    firstname: Customer.firstname,
+    lastname: Customer.lastname,
+    username: Customer.username,
+    password: Customer.password,
+    sexe:
+      Customer.sexe === 'MASC' || Customer.sexe === 'FEM'
+        ? Customer.sexe
+        : 'MASC', // Défaut à 'masculin'
+    imgProfil: Customer.imgProfil,
+    phone: Customer.phone || '',
+    email: Customer.email,
+    jobs: Customer.jobTitle,
+    regions: Customer.regions,
+    projets: [], // Champs supplémentaires (à adapter selon besoin)
+  };
+
+  console.log(dto);
+  return dto;
 }
 
 export function mapCustomerToDTO(Customer: any): DTOCustomerUpdate {
@@ -73,6 +99,7 @@ export function mapCustomerToDTO(Customer: any): DTOCustomerUpdate {
     regions: Customer.regions,
     projets: [], // Champs supplémentaires (à adapter selon besoin)
   };
+
   console.log(dto);
   return dto;
 }

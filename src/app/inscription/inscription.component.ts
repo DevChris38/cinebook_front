@@ -1,5 +1,6 @@
 import {
   Component,
+  effect,
   ElementRef,
   inject,
   OnInit,
@@ -7,7 +8,7 @@ import {
   ViewChild,
   WritableSignal,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../environments/environment.ts';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, startWith } from 'rxjs';
@@ -16,6 +17,7 @@ import {
   Customer,
   DTOCustomerCreation,
   mapCustomerToDTO,
+  mapCustomerToDTOCustomerCreation,
   mapDtoToCustomer,
 } from '../interfaces/customer';
 import {
@@ -47,6 +49,9 @@ import { SexeEnum } from '../enum/sexe-enum';
 import { RegionEnum } from '../enum/region-enum';
 import { CustomersService } from '../services/customers.service';
 import { Project } from '../interfaces/project';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { FirebaseStorageService } from '../services/firebase-storage.service';
 
 @Component({
   selector: 'app-inscription',
@@ -68,6 +73,7 @@ import { Project } from '../interfaces/project';
     MatInputModule,
     MatSelect,
     AsyncPipe,
+    ImageCropperComponent,
   ],
   templateUrl: './inscription.component.html',
   standalone: true,
@@ -92,13 +98,29 @@ export class InscriptionComponent implements OnInit {
   regionControl = new FormControl([]);
   filteredOptionsRegions: Observable<string[]>;
   @ViewChild('inputRegion') inputRegion: ElementRef<HTMLInputElement>;
+  imageChangedEvent: Event | null = null;
+  croppedImage: SafeUrl = '';
+  firebaseStorage = inject(FirebaseStorageService);
+  photoPortraitBlob: Blob = new Blob();
+  uploadedPhotoPortrait = signal('');
+  photoPortraitIsLoaded = signal(false);
+  hide = true;
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
     private fb: FormBuilder,
     private customersService: CustomersService,
-  ) {}
+    private sanitizer: DomSanitizer,
+    private router: Router,
+  ) {
+    effect(() => {
+      if (this.uploadedPhotoPortrait().length !== 0) {
+        console.log(this.uploadedPhotoPortrait());
+        this.customerForm.value.imgProfil = this.uploadedPhotoPortrait();
+      }
+    });
+  }
 
   ngOnInit() {
     this.filteredOptions = this.jobControl.valueChanges.pipe(
@@ -121,6 +143,8 @@ export class InscriptionComponent implements OnInit {
     this.customerData = {
       firstname: null,
       lastname: null,
+      username: null,
+      password: null,
       sexe: null,
       jobs: null,
       phone: null,
@@ -130,6 +154,28 @@ export class InscriptionComponent implements OnInit {
       projets: null,
     };
     this.initializeForm();
+  }
+
+  fileChangeEvent(event: Event): void {
+    console.log(event);
+    this.imageChangedEvent = event;
+    this.photoPortraitIsLoaded.set(true);
+  }
+
+  photoPortraitCropped(event: ImageCroppedEvent) {
+    console.log(event);
+    if (event.objectUrl != null) {
+      console.log(event.objectUrl);
+      this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(
+        event.objectUrl,
+      );
+      console.log(this.croppedImage);
+    }
+    // event.blob can be used to upload the cropped image
+    if (event.blob) {
+      this.photoPortraitBlob = event.blob;
+      console.log(this.photoPortraitBlob);
+    }
   }
 
   private _filter(name: string): string[] {
@@ -149,13 +195,14 @@ export class InscriptionComponent implements OnInit {
   }
 
   initializeForm() {
-    console.log(this.customerData);
     if (this.customerData !== null) {
       this.customerForm = this.fb.group({
         firstname: [this.customerData.firstname],
         lastname: [this.customerData.lastname],
+        username: [this.customerData.username],
+        password: [this.customerData.password],
         sexe: [this.customerData.sexe],
-        jobTitle: [this.customerData.jobs],
+        jobTitle: this.fb.array(this.customerData.jobs || []),
         phone: [this.customerData.phone],
         email: [this.customerData.email],
         imgProfil: [this.customerData.imgProfil],
@@ -166,27 +213,37 @@ export class InscriptionComponent implements OnInit {
 
   onSubmit(): void {
     if (this.customerForm.valid) {
-      this.jobs().forEach((job) => {
-        if (!this.customerForm.value.jobTitle.includes(job)) {
-          this.customerForm.value.jobTitle.push(job);
-        }
-      });
+      this.firebaseStorage
+        .uploadFile(this.photoPortraitBlob)
+        .subscribe((value) => {
+          this.uploadedPhotoPortrait.set(value);
+          this.customerForm.value.imgProfil = this.uploadedPhotoPortrait();
 
-      this.regionSignal().forEach((region) => {
-        if (!this.customerForm.value.regions.includes(region)) {
-          this.customerForm.value.regions.push(region);
-        }
-      });
-      this.customersService
-        .updateCustomer(mapCustomerToDTO(this.customerForm.value))
-        .subscribe({
-          next: (data) => {
-            console.log(data);
-          },
-          error: (e) => console.error(e),
+          this.jobs().forEach((job) => {
+            if (!this.customerForm.value.jobTitle.includes(job)) {
+              this.customerForm.value.jobTitle.push(job);
+            }
+          });
+
+          this.regionSignal().forEach((region) => {
+            if (!this.customerForm.value.regions.includes(region)) {
+              this.customerForm.value.regions.push(region);
+            }
+          });
+          this.customersService
+            .createCustomer(
+              mapCustomerToDTOCustomerCreation(this.customerForm.value),
+            )
+            .subscribe({
+              next: (data) => {
+                console.log(data);
+                this.router.navigate(['/login']);
+              },
+              error: (e) => console.error(e),
+            });
         });
     } else {
-      console.log('ohohoh');
+      console.log(this.customerForm);
     }
   }
 
@@ -228,5 +285,13 @@ export class InscriptionComponent implements OnInit {
     ]);
     this.inputRegion.nativeElement.value = '';
     event.option.deselect();
+  }
+
+  get usernameInput() {
+    return this.customerForm.get('username');
+  }
+
+  get passwordInput() {
+    return this.customerForm.get('password');
   }
 }
